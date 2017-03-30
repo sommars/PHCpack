@@ -200,7 +200,7 @@ def solve_checkin(pols, msg):
         print 'Either correct the input, or use the module sets'
         print 'to solve polynomial systems that are not square.'
 
-def solve(pols, silent=False, tasks=0, precision='d', checkin=True):
+def solve(pols, silent=False, tasks=0, precision='d', checkin=True, canonize=True):
     r"""
     Calls the blackbox solver.  On input in *pols* is a list of strings.
     By default, the solver will print to screen the computed root counts.
@@ -217,6 +217,9 @@ def solve(pols, silent=False, tasks=0, precision='d', checkin=True):
 
     If *checkin* (by default), the input *pols* is checked for being square.
     """
+    if canonize:
+        from phcpy.canonize import canonize
+        print canonize(pols)
     if checkin:
         errmsg = 'The blackbox solver accepts only square systems,'
         if not solve_checkin(pols, errmsg):
